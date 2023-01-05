@@ -1,13 +1,14 @@
 import React from 'react';
 import './App.css';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme';
+import { Navigation } from './routes';
 
 function App() {
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <h1>Welcome to Udyam Services.</h1>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Navigation />
+    </ThemeProvider>
   );
 }
 
