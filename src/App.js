@@ -4,7 +4,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Welcome to Udyam Registration and certificate.</h1>       
+        <h1>Welcome to Udyam Registration.</h1>       
       </header>
     </div>
   );
