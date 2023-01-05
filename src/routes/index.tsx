@@ -7,8 +7,8 @@ import MainBody from '../components/reusable/MainWrappers/MainBody';
 import LoadingPage from '../pages/LoadingPage';
 import { NoMatch } from '../pages/NoMatch';
 import * as routes from './constants';
-import About from '../components/about';
-import Contact from '../components/contact';
+import About from '../components/messages';
+import Contact from '../components/notifications';
 import Login from '../components/login';
 
 interface Props {
@@ -36,7 +36,7 @@ export const Navigation = () => {
             }
           />
           <Route
-            path={routes.ABOUT_US}
+            path={routes.MESSAGES}
             element={
               <HOC>
                 <About />
@@ -44,7 +44,7 @@ export const Navigation = () => {
             }
           />
           <Route
-            path={routes.CONTACT_US}
+            path={routes.NOTIFICATIONS}
             element={
               <HOC>
                 <Contact />
