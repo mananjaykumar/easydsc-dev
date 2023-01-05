@@ -127,30 +127,24 @@ export const Layout = ({ children }: any) => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton
-          size='large'
-          aria-label='show 4 new mails'
-          color='inherit'
-          onClick={() => {
-            navigate(routes.MESSAGES);
-          }}
-        >
+      <MenuItem
+        onClick={() => {
+          navigate(routes.MESSAGES);
+        }}
+      >
+        <IconButton size='large' aria-label='show 4 new mails' color='inherit'>
           <Badge badgeContent={4} color='error'>
             <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
       </MenuItem>
-      <MenuItem>
-        <IconButton
-          size='large'
-          aria-label='show 17 new notifications'
-          color='inherit'
-          onClick={() => {
-            navigate(routes.NOTIFICATIONS);
-          }}
-        >
+      <MenuItem
+        onClick={() => {
+          navigate(routes.NOTIFICATIONS);
+        }}
+      >
+        <IconButton size='large' aria-label='show 17 new notifications' color='inherit'>
           <Badge badgeContent={17} color='error'>
             <NotificationsIcon />
           </Badge>
