@@ -132,6 +132,9 @@ export const Layout = ({ children }: any) => {
           size='large'
           aria-label='show 4 new mails'
           color='inherit'
+          onClick={() => {
+            navigate(routes.MESSAGES);
+          }}
         >
           <Badge badgeContent={4} color='error'>
             <MailIcon />
@@ -144,6 +147,9 @@ export const Layout = ({ children }: any) => {
           size='large'
           aria-label='show 17 new notifications'
           color='inherit'
+          onClick={() => {
+            navigate(routes.NOTIFICATIONS);
+          }}
         >
           <Badge badgeContent={17} color='error'>
             <NotificationsIcon />
