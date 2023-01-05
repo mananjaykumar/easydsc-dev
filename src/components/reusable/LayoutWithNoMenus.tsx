@@ -30,19 +30,14 @@ const useStyles = makeStyles((theme: Theme) =>
     card: {
       minHeight: '100%',
     },
-  })
+  }),
 );
 
 export const LayoutWithNoMenus: React.FC<Props> = ({ children }) => {
   const classes = useStyles();
 
   return (
-    <Grid
-      container
-      direction="column"
-      alignItems="stretch"
-      className={classes.root}
-    >
+    <Grid container direction='column' alignItems='stretch' className={classes.root}>
       <Grid item className={classes.body}>
         <div className={classes.content}>
           <Card className={classes.card}>

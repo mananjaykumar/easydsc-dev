@@ -41,7 +41,7 @@
     "*.{js,ts,tsx}": [
       "npm run lint",
       "eslint --fix",
-      "git add"
+      "git add ."
     ]
   },
   "eslintConfig": {

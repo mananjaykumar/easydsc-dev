@@ -9,16 +9,7 @@ import theme from '../theme';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     text404: {
-      fontSize: `${1.25 *
-        1.25 *
-        1.25 *
-        1.25 *
-        1.25 *
-        1.25 *
-        1.25 *
-        1.25 *
-        1.25 *
-        1.25}rem`,
+      fontSize: `${1.25 * 1.25 * 1.25 * 1.25 * 1.25 * 1.25 * 1.25 * 1.25 * 1.25 * 1.25}rem`,
       fontWeight: 800,
       lineHeight: 1.2,
     },
@@ -28,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
     text3: {
       color: theme.palette?.text?.secondary,
     },
-  })
+  }),
 );
 
 export const NoMatch: React.FC = () => {
@@ -37,20 +28,14 @@ export const NoMatch: React.FC = () => {
 
   return (
     <LayoutWithNoMenus>
-      <Grid container rowSpacing={2} direction="column" alignItems="center">
+      <Grid container rowSpacing={2} direction='column' alignItems='center'>
         <Grid item>
-          <Grid
-            className={classes.text404}
-            color="primary"
-            data-testid="page_not_found"
-          >
+          <Grid className={classes.text404} color='primary' data-testid='page_not_found'>
             <b>404</b>
           </Grid>
         </Grid>
         <Grid item>
-          <Typography className={classes.text2}>
-            Oops! Page not found
-          </Typography>
+          <Typography className={classes.text2}>Oops! Page not found</Typography>
         </Grid>
         <Grid item>
           <Typography className={classes.text3}>
@@ -59,7 +44,7 @@ export const NoMatch: React.FC = () => {
         </Grid>
         <Grid item>
           <Button
-            variant="contained"
+            variant='contained'
             disableElevation
             sx={{
               // padding: '16px',
@@ -67,7 +52,7 @@ export const NoMatch: React.FC = () => {
               // letterSpacing: '0.125em',
             }}
             onClick={() => navigate(ROOT)}
-            data-testid="backBtn"
+            data-testid='backBtn'
           >
             Return to Application
           </Button>
