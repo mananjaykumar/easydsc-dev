@@ -130,6 +130,7 @@ export const Layout = ({ children }: any) => {
       <MenuItem
         onClick={() => {
           navigate(routes.MESSAGES);
+          handleMenuClose();
         }}
       >
         <IconButton size='large' aria-label='show 4 new mails' color='inherit'>
@@ -142,6 +143,7 @@ export const Layout = ({ children }: any) => {
       <MenuItem
         onClick={() => {
           navigate(routes.NOTIFICATIONS);
+          handleMenuClose();
         }}
       >
         <IconButton size='large' aria-label='show 17 new notifications' color='inherit'>
