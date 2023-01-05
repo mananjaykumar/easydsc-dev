@@ -23,7 +23,7 @@
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "lint": "tsc --noEmit && eslint \"**/*.{js,jsx,ts,tsx}\" --max-warnings=0",
-    "prettier": "prettier src -check",
+    "prettier": "prettier --write .",
     "lint-staged": "lint-staged"
   },
   "husky": {
