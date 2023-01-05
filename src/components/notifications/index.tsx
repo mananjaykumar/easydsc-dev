@@ -16,7 +16,7 @@ const Contact = () => {
           margin: '0 auto 0 auto',
         }}
       >
-        <Typography>Contact Us.</Typography>
+        <Typography>Notifications</Typography>
       </Grid>
     </Grid>
   );

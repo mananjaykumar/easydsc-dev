@@ -16,7 +16,7 @@ const About = () => {
           margin: '0 auto 0 auto',
         }}
       >
-        <Typography>About Us.</Typography>
+        <Typography>Messages.</Typography>
       </Grid>
     </Grid>
   );
