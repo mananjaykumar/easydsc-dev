@@ -26,6 +26,11 @@
     "prettier": "prettier src -check",
     "lint-staged": "lint-staged --config lint-staged.js"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
