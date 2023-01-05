@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Push
     steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+          registry-url: "https://registry.npmjs.org"
       - name: git-checkout
         uses: actions/checkout@v3
-        uses: actions/setup-node@v3
-        with: 
-          node-version: '16.x'
-          registry-url: 'https://registry.npmjs.org'
 
       - name: Install all dependencies
         run: npm install
