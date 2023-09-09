@@ -20,7 +20,9 @@ const Dashboard = () => {
   return (
     <Stack>
       <Stack p={2} textAlign='center'>
-        <Typography fontWeight={600} fontSize={24}>Get money out of credit card @1% only</Typography>
+        <Typography fontWeight={600} fontSize={24}>
+          Get money out of credit card @1% only
+        </Typography>
       </Stack>
       <Stack
         spacing={2}
