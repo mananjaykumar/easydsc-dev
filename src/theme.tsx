@@ -100,7 +100,8 @@ const theme: Theme = createTheme({
         // Name of the slot
         root: {
           boxSizing: 'border-box',
-          height: '34px',
+          // height: '34px',
+          height: '54px',
           '&.MuiInputBase-multiline': {
             height: 'auto !important',
           },
@@ -112,7 +113,8 @@ const theme: Theme = createTheme({
         // Name of the slot
         root: {
           boxSizing: 'border-box',
-          height: '34px',
+          // height: '34px',
+          height: '54px',
           lineHeight: '34px',
           borderRadius: '6px',
         },

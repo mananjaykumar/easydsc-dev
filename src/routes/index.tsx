@@ -7,9 +7,8 @@ import MainBody from '../components/reusable/MainWrappers/MainBody';
 import LoadingPage from '../pages/LoadingPage';
 import { NoMatch } from '../pages/NoMatch';
 import * as routes from './constants';
-import About from '../components/messages';
-import Contact from '../components/notifications';
-import Login from '../components/login';
+import Login from '../pages/Login';
+import Services from '../pages/Services';
 
 interface Props {
   children: React.ReactNode;
@@ -36,26 +35,42 @@ export const Navigation = () => {
             }
           />
           <Route
-            path={routes.MESSAGES}
-            element={
-              <HOC>
-                <About />
-              </HOC>
-            }
-          />
-          <Route
-            path={routes.NOTIFICATIONS}
-            element={
-              <HOC>
-                <Contact />
-              </HOC>
-            }
-          />
-          <Route
             path={routes.LOGIN}
             element={
               <HOC>
                 <Login />
+              </HOC>
+            }
+          />
+          <Route
+            path={routes.SIGNUP}
+            element={
+              <HOC>
+                <Login />
+              </HOC>
+            }
+          />
+          <Route
+            path={routes.SERVICES('accounting')}
+            element={
+              <HOC>
+                <Services />
+              </HOC>
+            }
+          />
+          <Route
+            path={routes.SERVICES('it-returns')}
+            element={
+              <HOC>
+                <Services />
+              </HOC>
+            }
+          />
+          <Route
+            path={routes.SERVICES('trading')}
+            element={
+              <HOC>
+                <Services />
               </HOC>
             }
           />
