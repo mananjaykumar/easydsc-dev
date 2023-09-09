@@ -1,24 +1,64 @@
-import React from 'react';
-import { Grid, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { Typography, Stack, TextField, Button } from '@mui/material';
+// import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Dashboard = () => {
+  // const navigate = useNavigate();
+  const [amount, setAmount] = useState<number>();
+  const handleSubmit = () => {
+    console.log('submitted', amount);
+    axios
+      .post(`${process.env.REACT_APP_BACKEND_URL}/payment`, {
+        amount: Number(amount) * 100,
+      })
+      .then((res) => {
+        window.location.replace(res?.data?.data?.data?.instrumentResponse?.redirectInfo?.url);
+      })
+      .catch((err) => console.log('error', err));
+  };
   return (
-    <Grid
-      container
-      sx={{
-        height: '100px',
-      }}
-    >
-      <Grid
-        item
+    <Stack>
+      <Stack p={2} textAlign='center'>
+        <Typography fontWeight={600} fontSize={24}>Get money out of credit card @1% only</Typography>
+      </Stack>
+      <Stack
+        spacing={2}
         sx={{
-          paddingTop: '50px',
-          margin: '0 auto 0 auto',
+          margin: '0 auto',
         }}
       >
-        <Typography>Welcome to Udyam Services.</Typography>
-      </Grid>
-    </Grid>
+        <TextField
+          id='outlined-number'
+          label='Amount'
+          type='number'
+          value={amount}
+          onChange={(e) => setAmount(Number(e.target.value))}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <Button variant='contained' onClick={handleSubmit}>
+          Submit
+        </Button>
+      </Stack>
+      <Stack
+        spacing={2}
+        sx={{
+          margin: '0 auto',
+          padding: '50px',
+        }}
+      >
+        <Typography>For Testing Use below credentials:</Typography>
+        <Typography>card_number: 4208585190116667,</Typography>
+        <Typography>card_type: CREDIT_CARD,</Typography>
+        <Typography>card_issuer: VISA,</Typography>
+        <Typography>expiry_month: 06,</Typography>
+        <Typography>expiry_year: 2027,</Typography>
+        <Typography>cvv: 508</Typography>
+        <Typography fontWeight={600}>Note: OTP = 123456</Typography>
+      </Stack>
+    </Stack>
   );
 };
 export default Dashboard;
