@@ -26,7 +26,7 @@ const Dashboard = () => {
           Get money out of credit card @1% only
         </Typography>
         {firstName?.length !== 0 && (
-          <Typography fontWeight={600} fontSize={18} color="primary">
+          <Typography fontWeight={600} fontSize={18} color='primary'>
             Welcome Onboard {firstName}!
           </Typography>
         )}
