@@ -14,7 +14,7 @@ const MainBody = ({ children }: any) => {
         className='main-body'
         sx={{
           bgcolor: theme.palette.background.default,
-          px: '16px',
+          // px: '16px',
           flexGrow: 1,
           position: 'relative',
         }}
