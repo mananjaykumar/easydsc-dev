@@ -281,6 +281,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import * as routes from '../../routes/constants';
 import { useUser } from '../../hooks/user';
+import toast from 'react-hot-toast';
 
 export const Layout = ({ children }: any) => {
   const navigate = useNavigate();
@@ -373,6 +374,7 @@ export const Layout = ({ children }: any) => {
                 color='inherit'
                 onClick={() => {
                   localStorage.clear();
+                  toast.success('Logged Out Successfully!');
                   location.reload();
                 }}
               >

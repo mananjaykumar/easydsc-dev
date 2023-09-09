@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { Typography, Stack, TextField, Button } from '@mui/material';
 // import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useUser } from '../../hooks/user';
 
 const Dashboard = () => {
   // const navigate = useNavigate();
+  const { firstName } = useUser();
   const [amount, setAmount] = useState<number>();
   const handleSubmit = () => {
     console.log('submitted', amount);
@@ -23,6 +25,11 @@ const Dashboard = () => {
         <Typography fontWeight={600} fontSize={24}>
           Get money out of credit card @1% only
         </Typography>
+        {firstName?.length !== 0 && (
+          <Typography fontWeight={600} fontSize={18} color='primary'>
+            Welcome Onboard {firstName}!
+          </Typography>
+        )}
       </Stack>
       <Stack
         spacing={2}
