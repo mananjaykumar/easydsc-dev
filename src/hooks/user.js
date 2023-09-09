@@ -1,4 +1,3 @@
-
 export const useUser = () => {
   const userData = localStorage.getItem('userData');
   if (userData === null) {
