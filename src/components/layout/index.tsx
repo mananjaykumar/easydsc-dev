@@ -194,7 +194,7 @@ export const Layout = ({ children }: any) => {
                 navigate(routes.ROOT);
               }}
             >
-              Udayam Services
+              Unique Services Company
             </Typography>
             <Search>
               <SearchIconWrapper>
