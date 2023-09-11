@@ -3,13 +3,14 @@ import { Avatar, Button, TextField, Paper, Box, Grid, Typography } from '@mui/ma
 import CircularProgress from '@mui/material/CircularProgress';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import * as routes from '../routes/constants';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
 import Signup from './Signup';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
 const Login = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [loading, setLoading] = React.useState(false);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
@@ -24,7 +25,7 @@ const Login = () => {
         localStorage.setItem('userData', JSON.stringify(res.data));
         toast.success(res.data.message);
         setLoading(false);
-        window.location.replace(routes.ROOT);
+        navigate(routes.ROOT);
       })
       .catch((error) => {
         toast.error(error.response.data.message);
