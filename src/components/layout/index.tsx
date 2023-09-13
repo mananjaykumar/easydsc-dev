@@ -289,7 +289,6 @@ interface Props {
 }
 
 export const Layout = ({ children, token, logout }: Props) => {
-  console.log('token', token);
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const isMenuOpen = Boolean(anchorEl);

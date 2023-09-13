@@ -9,7 +9,6 @@ const Dashboard = () => {
   const { userInfo } = useUser();
   const [amount, setAmount] = useState<number>();
   const handleSubmit = () => {
-    console.log('submitted', amount);
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/api/payment`, {
         amount: Number(amount) * 100,

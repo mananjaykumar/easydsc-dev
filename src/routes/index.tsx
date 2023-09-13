@@ -31,8 +31,6 @@ export const Navigation = () => {
   // toast('User is already Logged In!', {
   //   icon: '👏',
   // });
-
-  console.log('token', token);
   return (
     <ErrorBoundary>
       <Suspense fallback={<LoadingPage />}>
