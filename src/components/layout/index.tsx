@@ -280,13 +280,17 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import * as routes from '../../routes/constants';
-import { useUser } from '../../hooks/user';
 import toast from 'react-hot-toast';
 
-export const Layout = ({ children }: any) => {
+interface Props {
+  children: any;
+  token: string;
+  logout: () => void;
+}
+
+export const Layout = ({ children, token, logout }: Props) => {
+  console.log('token', token);
   const navigate = useNavigate();
-  const { firstName } = useUser();
-  console.log('firstName', firstName);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const isMenuOpen = Boolean(anchorEl);
 
@@ -316,6 +320,14 @@ export const Layout = ({ children }: any) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+      <MenuItem
+        onClick={() => {
+          navigate(routes.DASHBOARD);
+          handleMenuClose();
+        }}
+      >
+        Dashboard
+      </MenuItem>
       <MenuItem
         onClick={() => {
           navigate(routes.SERVICES('accounting'));
@@ -365,22 +377,17 @@ export const Layout = ({ children }: any) => {
             >
               Unique Services Company
             </Typography>
-            {firstName?.length === 0 ? (
-              <Button color='inherit' onClick={() => navigate(routes.LOGIN)}>
-                Login
-              </Button>
-            ) : (
+            {token ? (
               <Button
                 color='inherit'
                 onClick={() => {
-                  localStorage.clear();
+                  logout();
                   toast.success('Logged Out Successfully!');
-                  location.reload();
                 }}
               >
                 Logout
               </Button>
-            )}
+            ) : undefined}
           </Toolbar>
         </AppBar>
         {renderMenu}
