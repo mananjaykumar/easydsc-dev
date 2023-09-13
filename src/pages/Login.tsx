@@ -1,16 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import { Avatar, Button, TextField, Paper, Box, Grid, Typography } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import * as routes from '../routes/constants';
-import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import Signup from './Signup';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-const Login = () => {
+interface Props {
+  login: (userInfo: any) => void;
+}
+
+const Login = (props: Props) => {
+  const { login } = props;
   const location = useLocation();
-  const navigate = useNavigate();
   const [loading, setLoading] = React.useState(false);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
@@ -22,10 +27,11 @@ const Login = () => {
         password: data.get('password'),
       })
       .then((res) => {
-        localStorage.setItem('userData', JSON.stringify(res.data));
+        // localStorage.setItem('userData', JSON.stringify(res.data));
         toast.success(res.data.message);
         setLoading(false);
-        navigate(routes.ROOT);
+        login(res?.data);
+        // navigate(routes.ROOT);
       })
       .catch((error) => {
         toast.error(error.response.data.message);
@@ -49,7 +55,7 @@ const Login = () => {
           backgroundPosition: 'center',
         }}
       />
-      {location.pathname === '/login' ? (
+      {location.pathname !== '/signup' ? (
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
@@ -63,8 +69,8 @@ const Login = () => {
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography component='h1' variant='h5'>
-              Sign in
+            <Typography component='h1' variant='h1'>
+              Please Log in First !
             </Typography>
             <Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
