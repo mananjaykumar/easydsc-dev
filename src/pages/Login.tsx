@@ -8,14 +8,12 @@ import { useLocation, Link } from 'react-router-dom';
 import Signup from './Signup';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { login } from '../store/slices/AuthSlice';
 
-interface Props {
-  login: (userInfo: any) => void;
-}
-
-const Login = (props: Props) => {
-  const { login } = props;
+const Login = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(false);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
@@ -30,7 +28,8 @@ const Login = (props: Props) => {
         // localStorage.setItem('userData', JSON.stringify(res.data));
         toast.success(res.data.message);
         setLoading(false);
-        login(res?.data);
+        // login(res?.data);
+        dispatch(login({ userInfo: res?.data }));
         // navigate(routes.ROOT);
       })
       .catch((error) => {
