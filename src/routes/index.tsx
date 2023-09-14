@@ -29,8 +29,6 @@ export const Navigation = () => {
   // const { token, login, logout } = useAuth();
   const { userData } = useSelector((state: RootState) => state.auth);
 
-  console.log('token', userData?.token);
-
   return (
     <ErrorBoundary>
       <Suspense fallback={<LoadingPage />}>
