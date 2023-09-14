@@ -281,15 +281,17 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import * as routes from '../../routes/constants';
 import toast from 'react-hot-toast';
+import { logout } from '../../store/slices/AuthSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 interface Props {
   children: any;
-  token: string;
-  logout: () => void;
 }
 
-export const Layout = ({ children, token, logout }: Props) => {
+export const Layout = ({ children }: Props) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { userData } = useSelector((state: any) => state.auth);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const isMenuOpen = Boolean(anchorEl);
 
@@ -376,11 +378,11 @@ export const Layout = ({ children, token, logout }: Props) => {
             >
               Unique Services Company
             </Typography>
-            {token ? (
+            {userData?.token ? (
               <Button
                 color='inherit'
                 onClick={() => {
-                  logout();
+                  dispatch(logout());
                   toast.success('Logged Out Successfully!');
                 }}
               >

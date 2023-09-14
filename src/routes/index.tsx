@@ -9,35 +9,33 @@ import { NoMatch } from '../pages/NoMatch';
 import * as routes from './constants';
 import Login from '../pages/Login';
 import Services from '../pages/Services';
-import useAuth from '../hooks/useAuth';
+// import useAuth from '../hooks/useAuth';
 import Home from '../components/Home/Home';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 
 interface Props {
   children: React.ReactNode;
-  token: string;
-  logout: () => void;
 }
-const HOC = ({ children, token, logout }: Props) => {
+const HOC = ({ children }: Props) => {
   return (
-    <Layout token={token} logout={logout}>
+    <Layout>
       <MainBody>{children}</MainBody>
     </Layout>
   );
 };
 
 export const Navigation = () => {
-  const { token, login, logout } = useAuth();
+  // const { token, login, logout } = useAuth();
+  const { userData } = useSelector((state: RootState) => state.auth);
 
-  // toast('User is already Logged In!', {
-  //   icon: '👏',
-  // });
   return (
     <ErrorBoundary>
       <Suspense fallback={<LoadingPage />}>
-        <HOC token={token} logout={logout}>
+        <HOC>
           <Routes>
             <Route path={routes.ROOT} element={<Home />} />
-            {token ? (
+            {userData?.token ? (
               <>
                 <Route path={routes.LOGIN} element={<Navigate to={routes.DASHBOARD} />} />
                 <Route path={routes.SIGNUP} element={<Navigate to={routes.DASHBOARD} />} />
@@ -48,7 +46,7 @@ export const Navigation = () => {
                 <Route path='*' element={<NoMatch />} />
               </>
             ) : (
-              <Route path='*' element={<Login login={login} />} />
+              <Route path='*' element={<Login />} />
             )}
             {/* <Route path='*' element={<NoMatch />} /> */}
           </Routes>

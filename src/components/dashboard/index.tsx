@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useState, useEffect } from 'react';
 import { Typography, Stack, TextField, Button } from '@mui/material';
 // import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import useUser from '../../hooks/useUser';
+// import useUser from '../../hooks/useUser';
+// import useAuth from '../../hooks/useAuth';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../../store/slices/AuthSlice';
+import toast from 'react-hot-toast';
 
 const Dashboard = () => {
-  // const navigate = useNavigate();
-  const { userInfo } = useUser();
+  const dispatch = useDispatch();
+  const { userData } = useSelector((state: any) => state.auth);
   const [amount, setAmount] = useState<number>();
   const handleSubmit = () => {
     axios
@@ -18,15 +23,30 @@ const Dashboard = () => {
       })
       .catch((err) => console.log('error', err));
   };
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_BACKEND_URL}/api/user/auth`, {
+        headers: {
+          Authorization: `Bearer ${userData?.token}`,
+        },
+      })
+      .catch((err) => {
+        if (err.response.data.message === 'Authorization Failed!') {
+          toast.error('Session Ended! Please Login again.');
+          dispatch(logout());
+        }
+      });
+  }, []);
   return (
     <Stack>
       <Stack p={2} textAlign='center'>
         <Typography fontWeight={600} fontSize={24}>
           Get money out of credit card @1% only
         </Typography>
-        {userInfo?.firstName?.length !== 0 && (
+        {userData?.firstName?.length !== 0 && (
           <Typography fontWeight={600} fontSize={18} color='primary'>
-            Welcome Onboard {userInfo?.firstName}!
+            Welcome Onboard {userData?.firstName}!
           </Typography>
         )}
       </Stack>
