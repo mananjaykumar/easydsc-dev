@@ -58,6 +58,11 @@ const Home = () => {
           backSpeed={50}
         />
       </Stack>
+      <Stack>
+        <Typography>
+          Feel free to checkout my another application: https://restaurant-ui-five.vercel.app/
+        </Typography>
+      </Stack>
       <Stack
         sx={{
           margin: '0 auto',
