@@ -64,8 +64,8 @@ const Home = () => {
         }}
       >
         <Typography>
-          Feel free to checkout my another application:{' '}
-          <a href='https://restaurant-ui-five.vercel.app' />/
+          Feel free to checkout my another
+          <a href='https://restaurant-ui-five.vercel.app'>Application</a>
         </Typography>
       </Stack>
       <Stack
