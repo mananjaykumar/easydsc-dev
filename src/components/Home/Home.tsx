@@ -63,16 +63,6 @@ const Home = () => {
           margin: '0 auto',
         }}
       >
-        <Typography>
-          Feel free to checkout my another
-          <a href='https://restaurant-ui-five.vercel.app'>Application</a>
-        </Typography>
-      </Stack>
-      <Stack
-        sx={{
-          margin: '0 auto',
-        }}
-      >
         <Button
           variant='contained'
           sx={{
