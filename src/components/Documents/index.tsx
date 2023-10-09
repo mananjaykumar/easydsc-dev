@@ -1,7 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import { Button, CircularProgress, Grid, Stack, Typography } from '@mui/material';
-import DocViewer, { DocViewerRenderers } from '@cyntler/react-doc-viewer';
+import DocViewer, {
+  PDFRenderer,
+  PNGRenderer,
+  JPGRenderer,
+  CSVRenderer,
+} from '@cyntler/react-doc-viewer';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 // import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
@@ -27,14 +32,14 @@ const ViewDocument = (props: IViewDocumentProps) => {
     return (
       <DocViewer
         documents={docs}
-        pluginRenderers={DocViewerRenderers}
-        config={{
-          header: {
-            disableHeader: false,
-            disableFileName: false,
-            retainURLParams: false,
-          },
-        }}
+        pluginRenderers={[PDFRenderer, PNGRenderer, JPGRenderer, CSVRenderer]}
+        // config={{
+        //   header: {
+        //     disableHeader: false,
+        //     disableFileName: false,
+        //     retainURLParams: false,
+        //   },
+        // }}
       />
     );
     // return <Document file={document.path} />;
@@ -94,6 +99,11 @@ const Documents = () => {
                 <li key={doc._id}>
                   <Button
                     onClick={() => {
+                      setDoc({
+                        path: '',
+                        contentType: '',
+                        fileName: '',
+                      });
                       setDoc({
                         path: `${process.env.REACT_APP_BACKEND_URL}/${doc.doc.path}`,
                         contentType: doc.doc.contentType,

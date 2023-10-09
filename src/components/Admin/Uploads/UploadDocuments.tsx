@@ -30,14 +30,14 @@ const UploadDocuments = () => {
       name: '',
     },
   });
-  const acceptedFiles = ['.docx', '.pdf', '.pptx'];
+  const acceptedFiles = ['.docx', '.pdf', '.pptx', '.csv', '.jpeg', '.png', '.jpg'];
 
   const handleSubmit = () => {
     dispatch(setProgress({ progress: 10 }));
     setLoading(true);
     axios
       .post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/admin/auth/upload-documents`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/admin/upload-documents`,
         {
           title: bannerState.title,
           description: bannerState.description,
