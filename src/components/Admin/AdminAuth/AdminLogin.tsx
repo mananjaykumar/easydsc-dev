@@ -18,7 +18,7 @@ const AdminLogin = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/api/auth/login`, {
+      .post(`${process.env.REACT_APP_BACKEND_URL}/api/admin/auth/login`, {
         email: data.get('email'),
         password: data.get('password'),
       })
@@ -37,7 +37,7 @@ const AdminLogin = () => {
   };
 
   return (
-    <Grid container component='main' sx={{ height: '91vh' }}>
+    <Grid container component='main' sx={{ height: '91vh', marginTop: '-10px' }}>
       <Grid
         item
         xs={false}
