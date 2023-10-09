@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import { Button, CircularProgress, Grid, Stack, Typography } from '@mui/material';
 import DocViewer, { DocViewerRenderers } from '@cyntler/react-doc-viewer';

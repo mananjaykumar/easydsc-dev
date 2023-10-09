@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { Stack, Button, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';

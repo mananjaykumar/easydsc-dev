@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react';
 import { Avatar, Button, TextField, Paper, Box, Grid, Typography } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
