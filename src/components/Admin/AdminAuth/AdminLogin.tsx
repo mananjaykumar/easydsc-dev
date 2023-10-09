@@ -9,30 +9,36 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { login } from '../../../store/slices/AuthSlice';
+import { setProgress } from '../../../store/slices/ProgressSlice';
 
 const AdminLogin = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(false);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    dispatch(setProgress({ progress: 10 }));
     setLoading(true);
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    dispatch(setProgress({ progress: 30 }));
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/api/admin/auth/login`, {
         email: data.get('email'),
         password: data.get('password'),
       })
       .then((res) => {
+        dispatch(setProgress({ progress: 70 }));
         // localStorage.setItem('userData', JSON.stringify(res.data));
         toast.success(res.data.message);
         setLoading(false);
         // login(res?.data);
         dispatch(login({ userInfo: res?.data?.data }));
         // navigate(routes.ROOT);
+        dispatch(setProgress({ progress: 100 }));
       })
       .catch((error) => {
         toast.error(error.response.data.message);
         setLoading(false);
+        dispatch(setProgress({ progress: 100 }));
       });
   };
 

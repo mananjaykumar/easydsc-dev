@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Dashboard from '../components/dashboard';
@@ -19,24 +20,27 @@ import Protected from './Protected';
 import Documents from '../components/Documents';
 import Admin from '../components/Admin';
 import UploadDocuments from '../components/Admin/Uploads/UploadDocuments';
+import LoadingBar from 'react-top-loading-bar';
 
 interface Props {
   children: React.ReactNode;
 }
 const HOC = ({ children }: Props) => {
+  const { progress } = useSelector((state: any) => state.progress);
   return (
     <Layout>
+      <LoadingBar color='#0726A1' progress={progress} height={3} />
       <MainBody>{children}</MainBody>
     </Layout>
   );
 };
-const HOCAdmin = ({ children }: Props) => {
-  return (
-    <Layout>
-      <MainBody>{children}</MainBody>
-    </Layout>
-  );
-};
+// const HOCAdmin = ({ children }: Props) => {
+//   return (
+//     <Layout>
+//       <MainBody>{children}</MainBody>
+//     </Layout>
+//   );
+// };
 
 export const Navigation = () => {
   // const { token, login, logout } = useAuth();
@@ -189,9 +193,9 @@ export const Navigation = () => {
               <Route
                 path={navLinks.ADMIN_UPLOAD_DOCUMENTS}
                 element={
-                  <HOCAdmin>
+                  <HOC>
                     <UploadDocuments />
-                  </HOCAdmin>
+                  </HOC>
                 }
               />
             </Route>

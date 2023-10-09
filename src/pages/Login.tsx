@@ -10,15 +10,18 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { login } from '../store/slices/AuthSlice';
+import { setProgress } from '../store/slices/ProgressSlice';
 
 const Login = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(false);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    dispatch(setProgress({ progress: 10 }));
     setLoading(true);
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    dispatch(setProgress({ progress: 30 }));
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/api/auth/login`, {
         email: data.get('email'),
@@ -26,15 +29,18 @@ const Login = () => {
       })
       .then((res) => {
         // localStorage.setItem('userData', JSON.stringify(res.data));
+        dispatch(setProgress({ progress: 70 }));
         toast.success(res?.data?.message);
         setLoading(false);
         // login(res?.data);
         dispatch(login({ userInfo: res?.data?.data }));
+        dispatch(setProgress({ progress: 100 }));
         // navigate(routes.ROOT);
       })
       .catch((error) => {
         toast.error(error?.response?.data?.message);
         setLoading(false);
+        dispatch(setProgress({ progress: 100 }));
       });
   };
 
