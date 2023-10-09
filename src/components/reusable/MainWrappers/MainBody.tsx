@@ -13,7 +13,7 @@ const MainBody = ({ children }: any) => {
         elevation={0}
         className='main-body'
         sx={{
-          bgcolor: theme.palette.background.default,
+          // bgcolor: theme.palette.background.default,
           // px: '16px',
           flexGrow: 1,
           position: 'relative',

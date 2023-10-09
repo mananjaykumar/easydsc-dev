@@ -281,8 +281,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import * as routes from '../../routes/constants';
 import toast from 'react-hot-toast';
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { logout } from '../../store/slices/AuthSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import theme from '../../theme';
 
 interface Props {
   children: any;
@@ -320,6 +323,22 @@ export const Layout = ({ children }: Props) => {
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
+      sx={{
+        '& .MuiList-root': {
+          padding: '5px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: theme.spacing(0.6),
+        },
+        '& .MuiMenuItem-root': {
+          backgroundColor: theme.palette.grey[100],
+          borderRadius: '4px',
+          fontSize: '13px',
+          '&:hover': {
+            backgroundColor: '#EDF5FF',
+          },
+        },
+      }}
     >
       <MenuItem
         onClick={() => {
@@ -353,12 +372,53 @@ export const Layout = ({ children }: Props) => {
       >
         Trading
       </MenuItem>
+      <MenuItem
+        onClick={() => {
+          navigate(routes.DOCUMENTS);
+          handleMenuClose();
+        }}
+      >
+        Documents
+      </MenuItem>
+      {!userData?.role?.includes('admin') && (
+        <MenuItem
+          onClick={() => {
+            navigate(routes.ADMIN_LOGIN);
+            handleMenuClose();
+          }}
+        >
+          Admin Login
+        </MenuItem>
+      )}
+      {userData?.role?.includes('admin') && (
+        <MenuItem
+          onClick={() => {
+            navigate(routes.ADMIN_UPLOAD_DOCUMENTS);
+            handleMenuClose();
+          }}
+        >
+          Upload Documents
+        </MenuItem>
+      )}
     </Menu>
   );
   return (
     <Stack>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position='static'>
+        <AppBar
+          position='fixed'
+          sx={{
+            boxShadow: '0 15px 40px -20px rgba(40,44,63,.15)',
+            backgroundColor: '#fff',
+            padding: '20px',
+            zIndex: 1000,
+            transform: 'translateZ(0)',
+            transition: 'transform .3s ease',
+            // contain: "size layout style",
+            height: '120px',
+            color: '#3d4152',
+          }}
+        >
           <Toolbar>
             <IconButton
               size='large'
@@ -380,7 +440,20 @@ export const Layout = ({ children }: Props) => {
             </Typography>
             {userData?.token ? (
               <Button
-                color='inherit'
+                // color='inherit'
+                variant='outlined'
+                sx={{
+                  backgroundColor: 'white',
+                  '&:hover': {
+                    backgroundColor: 'white',
+                    color: theme.palette.primary.main,
+                    '&:hover': {
+                      transform: 'scale(1.1,1.1)',
+                      transition: 'transform 0.2s',
+                    },
+                  },
+                }}
+                startIcon={<LogoutIcon />}
                 onClick={() => {
                   dispatch(logout());
                   toast.success('Logged Out Successfully!');
@@ -388,7 +461,29 @@ export const Layout = ({ children }: Props) => {
               >
                 Logout
               </Button>
-            ) : undefined}
+            ) : (
+              <Button
+                // color='inherit'
+                variant='outlined'
+                sx={{
+                  backgroundColor: 'white',
+                  '&:hover': {
+                    backgroundColor: 'white',
+                    color: theme.palette.primary.main,
+                    '&:hover': {
+                      transform: 'scale(1.1,1.1)',
+                      transition: 'transform 0.2s',
+                    },
+                  },
+                }}
+                startIcon={<LoginIcon />}
+                onClick={() => {
+                  navigate(routes.LOGIN);
+                }}
+              >
+                Login
+              </Button>
+            )}
           </Toolbar>
         </AppBar>
         {renderMenu}

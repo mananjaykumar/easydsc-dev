@@ -8,6 +8,7 @@ interface userDataType {
   message: string;
   user_id: string;
   firstName: string;
+  role: string[];
 }
 
 interface AuthState {

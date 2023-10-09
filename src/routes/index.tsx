@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Dashboard from '../components/dashboard';
@@ -6,18 +7,30 @@ import { Layout } from '../components/layout';
 import MainBody from '../components/reusable/MainWrappers/MainBody';
 import LoadingPage from '../pages/LoadingPage';
 import { NoMatch } from '../pages/NoMatch';
-import * as routes from './constants';
+import * as navLinks from './constants';
 import Login from '../pages/Login';
 import Services from '../pages/Services';
 // import useAuth from '../hooks/useAuth';
 import Home from '../components/Home/Home';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
+import { Stack } from '@mui/material';
+import Protected from './Protected';
+import Documents from '../components/Documents';
+import Admin from '../components/Admin';
+import UploadDocuments from '../components/Admin/Uploads/UploadDocuments';
 
 interface Props {
   children: React.ReactNode;
 }
 const HOC = ({ children }: Props) => {
+  return (
+    <Layout>
+      <MainBody>{children}</MainBody>
+    </Layout>
+  );
+};
+const HOCAdmin = ({ children }: Props) => {
   return (
     <Layout>
       <MainBody>{children}</MainBody>
@@ -32,7 +45,7 @@ export const Navigation = () => {
   return (
     <ErrorBoundary>
       <Suspense fallback={<LoadingPage />}>
-        <HOC>
+        {/* <HOC>
           <Routes>
             <Route path={routes.ROOT} element={<Home />} />
             {userData?.token ? (
@@ -47,10 +60,151 @@ export const Navigation = () => {
               </>
             ) : (
               <Route path='*' element={<Login />} />
-            )}
-            {/* <Route path='*' element={<NoMatch />} /> */}
+            )} */}
+        {/* <Route path='*' element={<NoMatch />} /> */}
+        {/* </Routes>
+        </HOC> */}
+        <Stack mt={location.pathname.includes('admin') ? '90px' : '130px'}>
+          <Routes>
+            <Route
+              path='/'
+              element={
+                <HOC>
+                  <Home />
+                </HOC>
+              }
+            />
+            <Route
+              element={
+                <Protected
+                  redirectPath={navLinks.ROOT}
+                  isAllowed={userData?.token ? false : true}
+                />
+              }
+            >
+              <Route
+                path={navLinks.LOGIN}
+                element={
+                  <HOC>
+                    <Login />
+                  </HOC>
+                }
+              />
+              <Route
+                path={navLinks.SIGNUP}
+                element={
+                  <HOC>
+                    <Login />
+                  </HOC>
+                }
+              />
+            </Route>
+            {/* <Route path={navLinks.ADMIN_ROOT} element={<Admin />} /> */}
+            <Route
+              element={
+                <Protected
+                  redirectPath={navLinks.LOGIN}
+                  isAllowed={
+                    userData?.token ? true : false
+                    // &&
+                    // (userData?.role?.includes('user') ? true : false)
+                  }
+                />
+              }
+            >
+              <Route
+                path={navLinks.DASHBOARD}
+                element={
+                  <HOC>
+                    <Dashboard />
+                  </HOC>
+                }
+              />
+              <Route
+                path={navLinks.SERVICES('accounting')}
+                element={
+                  <HOC>
+                    <Services />
+                  </HOC>
+                }
+              />
+              <Route
+                path={navLinks.SERVICES('it-returns')}
+                element={
+                  <HOC>
+                    <Services />
+                  </HOC>
+                }
+              />
+              <Route
+                path={navLinks.SERVICES('trading')}
+                element={
+                  <HOC>
+                    <Services />
+                  </HOC>
+                }
+              />
+              <Route
+                path={navLinks.DOCUMENTS}
+                element={
+                  <HOC>
+                    <Documents />
+                  </HOC>
+                }
+              />
+            </Route>
+
+            <Route
+              element={
+                <Protected
+                  redirectPath={navLinks.ROOT}
+                  isAllowed={
+                    (userData?.token ? false : true) ||
+                    (userData?.role?.includes('user') ? true : false)
+                  }
+                />
+              }
+            >
+              <Route
+                path={navLinks.ADMIN_LOGIN}
+                element={
+                  <HOC>
+                    <Admin />
+                  </HOC>
+                }
+              />
+            </Route>
+
+            <Route
+              element={
+                <Protected
+                  redirectPath={navLinks.ADMIN_LOGIN}
+                  isAllowed={
+                    (userData?.token ? true : false) &&
+                    (userData?.role?.includes('admin') ? true : false)
+                  }
+                />
+              }
+            >
+              <Route
+                path={navLinks.ADMIN_UPLOAD_DOCUMENTS}
+                element={
+                  <HOCAdmin>
+                    <UploadDocuments />
+                  </HOCAdmin>
+                }
+              />
+            </Route>
+            <Route
+              path='*'
+              element={
+                <HOC>
+                  <NoMatch />
+                </HOC>
+              }
+            />
           </Routes>
-        </HOC>
+        </Stack>
       </Suspense>
     </ErrorBoundary>
   );
