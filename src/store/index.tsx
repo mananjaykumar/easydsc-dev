@@ -6,7 +6,7 @@ const store = configureStore({
   // root reducer
   reducer: {
     auth: authSlice,
-    progres: ProgressSlice,
+    progress: ProgressSlice,
   },
 });
 

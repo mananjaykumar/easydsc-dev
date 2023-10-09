@@ -1,43 +1,44 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Typography, Stack, TextField, Button } from '@mui/material';
 // import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 // import useUser from '../../hooks/useUser';
 // import useAuth from '../../hooks/useAuth';
-import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../store/slices/AuthSlice';
-import toast from 'react-hot-toast';
+import { useSelector } from 'react-redux';
+// import { logout } from '../../store/slices/AuthSlice';
+// import toast from 'react-hot-toast';
 
 const Dashboard = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { userData } = useSelector((state: any) => state.auth);
-  const [amount, setAmount] = useState<number>();
+  const [amount, setAmount] = useState('');
   const handleSubmit = () => {
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/api/payment`, {
         amount: Number(amount) * 100,
       })
       .then((res) => {
+        console.log('res', res);
         window.location.replace(res?.data?.data?.data?.instrumentResponse?.redirectInfo?.url);
       })
       .catch((err) => console.log('error', err));
   };
 
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/api/user/auth`, {
-        headers: {
-          Authorization: `Bearer ${userData?.token}`,
-        },
-      })
-      .catch((err) => {
-        if (err.response.data.message === 'Authorization Failed!') {
-          toast.error('Session Ended! Please Login again.');
-          dispatch(logout());
-        }
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`${process.env.REACT_APP_BACKEND_URL}/api/user/auth`, {
+  //       headers: {
+  //         Authorization: `Bearer ${userData?.token}`,
+  //       },
+  //     })
+  //     .catch((err) => {
+  //       if (err.response.data.message === 'Authorization Failed!') {
+  //         toast.error('Session Ended! Please Login again.');
+  //         dispatch(logout());
+  //       }
+  //     });
+  // }, []);
   return (
     <Stack>
       <Stack p={2} textAlign='center'>
@@ -61,7 +62,7 @@ const Dashboard = () => {
           label='Amount'
           type='number'
           value={amount}
-          onChange={(e) => setAmount(Number(e.target.value))}
+          onChange={(e) => setAmount(e.target.value)}
           InputLabelProps={{
             shrink: true,
           }}

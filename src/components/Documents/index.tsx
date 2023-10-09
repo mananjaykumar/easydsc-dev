@@ -9,6 +9,8 @@ import DocViewer, {
 } from '@cyntler/react-doc-viewer';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { setProgress } from '../../store/slices/ProgressSlice';
+import { useDispatch } from 'react-redux';
 // import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
 // import { Document, Page } from 'react-pdf';
 
@@ -49,6 +51,7 @@ const ViewDocument = (props: IViewDocumentProps) => {
 };
 
 const Documents = () => {
+  const dispatch = useDispatch();
   const [documents, setDocuments] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const [doc, setDoc] = useState({
@@ -57,15 +60,20 @@ const Documents = () => {
     fileName: '',
   });
   useEffect(() => {
+    dispatch(setProgress({ progress: 10 }));
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/api/user/documents`)
       .then((res) => {
+        dispatch(setProgress({ progress: 30 }));
         setDocuments(res?.data?.data);
+        dispatch(setProgress({ progress: 70 }));
         setLoading(false);
+        dispatch(setProgress({ progress: 100 }));
       })
       .catch((err) => {
         toast.error(err?.response?.data?.message);
         setLoading(false);
+        dispatch(setProgress({ progress: 100 }));
       });
   }, []);
   if (loading) {
