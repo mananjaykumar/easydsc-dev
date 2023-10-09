@@ -26,14 +26,14 @@ const Login = () => {
       })
       .then((res) => {
         // localStorage.setItem('userData', JSON.stringify(res.data));
-        toast.success(res.data.message);
+        toast.success(res?.data?.message);
         setLoading(false);
         // login(res?.data);
-        dispatch(login({ userInfo: res?.data }));
+        dispatch(login({ userInfo: res?.data?.data }));
         // navigate(routes.ROOT);
       })
       .catch((error) => {
-        toast.error(error.response.data.message);
+        toast.error(error?.response?.data?.message);
         setLoading(false);
       });
   };
