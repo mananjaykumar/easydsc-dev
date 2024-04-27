@@ -36,11 +36,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
           MESSAGE: 'Build: ({sha}) {msg}' # The commit message
 
-      - name: Push
+  push:
+    runs-on: ubuntu-latest
+    needs: Build and Push
+    steps:
+      - name: Push to gh-pages
         uses: s0/git-publish-subdir-action@develop
         env:
-          REPO: build
-          BRANCH: gh-pages
-          FOLDER: gh-pages
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MESSAGE: 'Build ({sha}) {msg}'
+          REPO: self
+          BRANCH: gh-pases # The branch name where you want to push the assets
+          FOLDER: gh-pages # The directory where your assets are generated
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
+          MESSAGE: 'Push: ({sha}) {msg}' # The commit message
+
