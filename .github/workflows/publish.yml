@@ -42,12 +42,11 @@ jobs:
     name: Push to gh-pages
     steps:
       - name: Push
-        uses: s0/git-publish-subdir-action@develop
-        ref: build
-        env:
-          REPO: self
-          BRANCH: gh-pages # The branch name where you want to push the assets
-          FOLDER: gh-pages # The directory where your assets are generated
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
-          MESSAGE: 'Push: ({sha}) {msg}' # The commit message
-
+        # uses: s0/git-publish-subdir-action@develop
+        uses: peaceiris/actions-gh-pages@v4
+        # env:
+        #   REPO: self
+        #   BRANCH: gh-pages # The branch name where you want to push the assets
+        #   FOLDER: gh-pages # The directory where your assets are generated
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
+        #   MESSAGE: 'Push: ({sha}) {msg}' # The commit message
