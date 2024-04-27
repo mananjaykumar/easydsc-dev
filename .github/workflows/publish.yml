@@ -43,6 +43,7 @@ jobs:
     steps:
       - name: Push
         uses: s0/git-publish-subdir-action@develop
+        ref: build
         env:
           REPO: self
           BRANCH: gh-pages # The branch name where you want to push the assets
