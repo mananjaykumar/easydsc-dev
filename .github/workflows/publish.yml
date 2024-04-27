@@ -44,6 +44,9 @@ jobs:
       - name: Push
         # uses: s0/git-publish-subdir-action@develop
         uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages # default: gh-pages
         # env:
         #   REPO: self
         #   BRANCH: gh-pages # The branch name where you want to push the assets
