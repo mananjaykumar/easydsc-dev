@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/easydsc-dev/static/css/main.073c9b0a.css",
-    "main.js": "/easydsc-dev/static/js/main.3ab74162.js",
-    "static/js/787.2064eb7e.chunk.js": "/easydsc-dev/static/js/787.2064eb7e.chunk.js",
-    "index.html": "/easydsc-dev/index.html",
-    "main.073c9b0a.css.map": "/easydsc-dev/static/css/main.073c9b0a.css.map",
-    "main.3ab74162.js.map": "/easydsc-dev/static/js/main.3ab74162.js.map",
-    "787.2064eb7e.chunk.js.map": "/easydsc-dev/static/js/787.2064eb7e.chunk.js.map"
+    "main.css": "/static/css/main.073c9b0a.css",
+    "main.js": "/static/js/main.ebcb0518.js",
+    "static/js/787.2064eb7e.chunk.js": "/static/js/787.2064eb7e.chunk.js",
+    "index.html": "/index.html",
+    "main.073c9b0a.css.map": "/static/css/main.073c9b0a.css.map",
+    "main.ebcb0518.js.map": "/static/js/main.ebcb0518.js.map",
+    "787.2064eb7e.chunk.js.map": "/static/js/787.2064eb7e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.3ab74162.js"
+    "static/js/main.ebcb0518.js"
   ]
 }
