@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React, { Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Dashboard from '../components/dashboard';
