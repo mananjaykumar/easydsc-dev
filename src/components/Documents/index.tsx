@@ -104,8 +104,8 @@ const Documents = () => {
           {documents.length !== 0 ? (
             documents.map((doc: any) => {
               return (
-                <li key={doc._id}>
-                  <Button
+                <li key={doc._id} style={{ marginBottom: '0.8rem' }}>
+                  {/* <Button
                     onClick={() => {
                       setDoc({
                         path: '',
@@ -123,7 +123,14 @@ const Documents = () => {
                     }}
                   >
                     {doc.title}
-                  </Button>
+                  </Button> */}
+                  <a
+                    href={`${process.env.REACT_APP_BACKEND_URL}/${doc.doc.path}`}
+                    rel='noreferrer'
+                    target='_blank'
+                  >
+                    {doc.title}
+                  </a>
                 </li>
               );
             })
